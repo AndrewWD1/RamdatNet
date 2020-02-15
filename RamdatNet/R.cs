@@ -9,33 +9,56 @@ namespace RamdatNet
     /// <summary>
     /// Curried Function to add two ints.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static Func<int, int> Add(int a) => b => a + b;
     /// <summary>
     /// Curried Function to add two doubles.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static Func<double, double> Add(double a) => b => a + b;
     /// <summary>
     /// Curried Function to add two decimals.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static Func<decimal, decimal> Add(decimal a) => b => a + b;
     /// <summary>
     /// Add two ints.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static int Add(int a, int b) => a + b;
     /// <summary>
     /// Add two doubles.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static double Add(double a, double b) => a + b;
     /// <summary>
     /// Add two decimals.
     /// </summary>
+    /// <code>
+    /// R.Add(1)(2); //-> 3
+    /// </code>
     public static decimal Add(decimal a, decimal b) => a + b;
     /// <summary>
     /// Applies a function to the value at the given index of an array, returning a new copy of the array with the element at the given index replaced with the result of the function application.
     /// </summary>
-    public static IList<T> Adjust<T>(int index, Func<T, T> fn, IList<T> list)
+    /// <code>
+    /// int[] list = { 1, 2, 3 };
+    /// R.Adjust( 1, R.Add(1), list ); //-> { 1, 3, 3 } 
+    /// </code>
+
+    public static List<T> Adjust<T>(int index, Func<T, T> fn, IList<T> list)
     {
-      IList<T> newList = new List<T>(list);
+      List<T> newList = new List<T>(list);
       newList[index] = fn(newList[index]);
       return newList;
     }
@@ -63,6 +86,8 @@ namespace RamdatNet
     /// <summary>
     /// Returns a function that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.
     /// </summary>
+    /// <para />
+    /// 
     public static Func<T> Always<T>(T x) => () => x;
 
     public static bool And(bool a, bool b) => a && b;
