@@ -13,6 +13,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static Func<int, int> Add(int a) => b => a + b;
+
     /// <summary>
     /// Curried Function to add two doubles.
     /// </summary>
@@ -20,6 +21,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static Func<double, double> Add(double a) => b => a + b;
+
     /// <summary>
     /// Curried Function to add two decimals.
     /// </summary>
@@ -27,6 +29,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static Func<decimal, decimal> Add(decimal a) => b => a + b;
+
     /// <summary>
     /// Add two ints.
     /// </summary>
@@ -34,6 +37,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static int Add(int a, int b) => a + b;
+
     /// <summary>
     /// Add two doubles.
     /// </summary>
@@ -41,6 +45,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static double Add(double a, double b) => a + b;
+
     /// <summary>
     /// Add two decimals.
     /// </summary>
@@ -48,6 +53,7 @@ namespace RamdatNet
     /// R.Add(1)(2); //-> 3
     /// </code>
     public static decimal Add(decimal a, decimal b) => a + b;
+
     /// <summary>
     /// Applies a function to the value at the given index of an array, returning a new copy of the array with the element at the given index replaced with the result of the function application.
     /// </summary>
@@ -55,13 +61,13 @@ namespace RamdatNet
     /// int[] list = { 1, 2, 3 };
     /// R.Adjust( 1, R.Add(1), list ); //-> { 1, 3, 3 } 
     /// </code>
-
     public static List<T> Adjust<T>(int index, Func<T, T> fn, IList<T> list)
     {
       List<T> newList = new List<T>(list);
       newList[index] = fn(newList[index]);
       return newList;
     }
+    
     /// <summary>
     /// Curried. Returns true if all elements of the list match the predicate, false if there are any that don't.
     /// </summary>
