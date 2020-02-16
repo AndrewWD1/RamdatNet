@@ -64,6 +64,7 @@ namespace RamdatNet
     public static List<T> Adjust<T>(int index, Func<T, T> fn, IList<T> list)
     {
       List<T> newList = new List<T>(list);
+      if (index >= list.Count) return newList;
       newList[index] = fn(newList[index]);
       return newList;
     }
@@ -314,8 +315,8 @@ namespace RamdatNet
     ///       x => x + 1,
     ///       x => x % 7
     ///     })
-    /// composesed(8) //-> 2
-    /// composesed(6) //-> 0
+    /// composed(8) //-> 2
+    /// composed(6) //-> 0
     /// </code>
     public static Func<T, T> Compose<T>(IEnumerable<Func<T, T>> Fns)
       => x => Fns.Reverse().Aggregate(x, (a, c) => c(a));

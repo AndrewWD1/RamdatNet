@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace RamdatNet.Tests
 {
   [TestClass]
-  public class RamdatNet_AddShould
+  public class AddTests
   {
     [TestMethod]
     public void Add_InputIs1_InputIs2_Return3()
