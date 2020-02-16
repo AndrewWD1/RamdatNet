@@ -67,35 +67,73 @@ namespace RamdatNet
       newList[index] = fn(newList[index]);
       return newList;
     }
-    
+
     /// <summary>
     /// Curried. Returns true if all elements of the list match the predicate, false if there are any that don't.
     /// </summary>
+    /// <code>
+    /// int[] list = { 2, 4, 6 };
+    /// R.All(x => x % 2 == 0)(list); //-> true 
+    /// R.All(x => x > 3)(list); //-> false 
+    /// </code>
     public static Func<IEnumerable<T>, bool> All<T>(Predicate<T> p)
       => list => list.Aggregate(true, (a, c) => a && p(c));
+
     /// <summary>
     /// Returns true if all elements of the list match the predicate, false if there are any that don't.
     /// </summary>
+    /// <code>
+    /// int[] list = { 2, 4, 6 };
+    /// R.All(x => x % 2 == 0, list) //-> true 
+    /// R.All(x => x > 3, list) //-> false 
+    /// </code>
     public static bool All<T>(Predicate<T> p, IEnumerable<T> list)
       => list.Aggregate(true, (a, c) => a && p(c));
+
     /// <summary>
-    /// Curried. Takes a list of predicates and returns a predicate that returns true for a given list of arguments if every one of the provided predicates is satisfied by those arguments.
+    /// Curried. Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
     /// </summary>
+    /// <code>
+    /// var checker = R.AllPass(new int[] {
+    ///                 x => x % 2 == 0,
+    ///                 x => x > 1
+    ///               });
+    /// checker(4); //-> true
+    /// checker(0); //-> false
+    /// </code>
     public static Predicate<T> AllPass<T>(IEnumerable<Predicate<T>> predicateList)
       => y => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
+
     /// <summary>
-    /// Takes a list of predicates and returns a predicate that returns true for a given list of arguments if every one of the provided predicates is satisfied by those arguments.
+    /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
     /// </summary>
+    /// <code>
+    /// R.AllPass(new int[] {
+    ///   x => x % 2 == 0,
+    ///   x => x > 1
+    /// }, 4); //-> true
+    /// </code>
     public static bool AllPass<T>(IEnumerable<Predicate<T>> predicateList, T y)
       => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
 
     /// <summary>
     /// Returns a function that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.
     /// </summary>
-    /// <para />
-    /// 
+    /// <code>
+    /// var t = R.Always("Tee");
+    /// t(); //-> "Tee"
+    /// </code>
     public static Func<T> Always<T>(T x) => () => x;
 
+    /// <summary>
+    /// Returns true if both arguments are true; false otherwise.
+    /// </summary>
+    /// <code>
+    /// R.And(true, true); //=> true
+    /// R.And(true, false); //=> false
+    /// R.And(false, true); //=> false
+    /// R.And(false, false); //=> false
+    /// </code>
     public static bool And(bool a, bool b) => a && b;
 
     public static Predicate<IEnumerable<T>> Any<T>(Predicate<T> p)
