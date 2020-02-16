@@ -94,7 +94,7 @@ namespace RamdatNet
     /// Curried. Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
     /// </summary>
     /// <code>
-    /// var checker = R.AllPass(new int[] {
+    /// var checker = R.AllPass(new Predicate{int}[] {
     ///                 x => x % 2 == 0,
     ///                 x => x > 1
     ///               });
@@ -108,7 +108,7 @@ namespace RamdatNet
     /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
     /// </summary>
     /// <code>
-    /// R.AllPass(new int[] {
+    /// R.AllPass(new Predicate{int}[] {
     ///   x => x % 2 == 0,
     ///   x => x > 1
     /// }, 4); //-> true
@@ -136,21 +136,95 @@ namespace RamdatNet
     /// </code>
     public static bool And(bool a, bool b) => a && b;
 
+    /// <summary>
+    /// Curried. Returns true if at least one of the elements of the list match the predicate, false otherwise.
+    /// </summary>
+    /// <code>
+    /// int[] list = { 2, 3, 5 };
+    /// R.Any(x => x % 2 == 0)(list); //-> true 
+    /// R.Any(x => x > 6)(list); //-> false 
+    /// </code>
     public static Predicate<IEnumerable<T>> Any<T>(Predicate<T> p)
       => list => list.Aggregate(false, (a, c) => a || p(c));
+
+    /// <summary>
+    /// Returns true if at least one of the elements of the list match the predicate, false otherwise.
+    /// </summary>
+    /// <code>
+    /// int[] list = { 2, 3, 5 };
+    /// R.Any(x => x % 2 == 0, list); //-> true 
+    /// R.Any(x => x > 6, list); //-> false 
+    /// </code>
     public static bool Any<T>(Predicate<T> p, IEnumerable<T> list)
       => list.Aggregate(false, (a, c) => a || p(c));
 
+    /// <summary>
+    /// Curried. Takes a list of predicates and returns a predicate that returns true for a given list of arguments if at least one of the provided predicates is satisfied by those arguments.
+    /// </summary>
+    /// <code>
+    /// var checker = R.AnyPass(new Predicate{int}[] {
+    ///                 x => x % 2 == 0,
+    ///                 x => x > 1
+    ///               });
+    /// checker(0); //-> true
+    /// checker(1); //-> false
+    /// </code>
     public static Predicate<T> AnyPass<T>(IEnumerable<Predicate<T>> predicateList)
       => y => predicateList.Select(p => p(y)).Aggregate((a, c) => a || c);
+
+    /// <summary>
+    /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
+    /// </summary>
+    /// <code>
+    /// R.AllPass(new Predicate{int}[] {
+    ///   x => x % 2 == 0,
+    ///   x => x > 1
+    /// }, 0); //-> true
+    /// </code>
     public static bool AnyPass<T>(IEnumerable<Predicate<T>> predicateList, T y)
       => predicateList.Select(p => p(y)).Aggregate((a, c) => a || c);
 
+    /// <summary>
+    /// Ap applies a list of functions to a list of values.
+    /// </summary>
+    /// <code>
+    /// R.Ap(
+    ///   new Func{int, int} { R.Multiply(2), R.Add(3) }, 
+    ///   new int[] { 1, 2, 3 }
+    /// );  //=> { 2, 4, 6, 4, 5, 6 }
+    /// R.Ap(
+    ///   new Func{string, string} { R.Concat("tasty "), R.ToUpper }, 
+    ///   new string[] { "pizza", "salad" }
+    /// );  //=> { "tasty pizza", "tasty salad", "PIZZA", "SALAD" }
+    /// </code>
     public static IEnumerable<K> Ap<T, K>(IEnumerable<Func<T, K>> fns, IEnumerable<T> list)
       => fns.Select(fn => list.Select(fn)).Aggregate((a, c) => a.Concat(c));
 
+    /// <summary>
+    /// Curried. Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
+    /// </summary>
+    /// <code>
+    /// R.Aperture(2)(new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 } }
+    /// R.Aperture(3)(new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> { { 1, 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } }
+    /// R.Aperture(7)(new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> {}
+    /// </code>
     public static Func<IEnumerable<T>, IEnumerable<IEnumerable<T>>> Aperture<T>(int num)
       => list => Aperture(num, list);
+
+    /// <summary>
+    /// Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
+    /// </summary>
+    /// <code>
+    /// R.Aperture(2, new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 } }
+    /// R.Aperture(3, new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> { { 1, 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } }
+    /// R.Aperture(7, new int[] { 1, 2, 3, 4, 5 }); 
+    /// //=> {}
+    /// </code>
     public static IEnumerable<IEnumerable<T>> Aperture<T>(int num, IEnumerable<T> list)
     {
       List<IEnumerable<T>> a = new List<IEnumerable<T>>();
