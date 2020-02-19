@@ -431,7 +431,7 @@ namespace RamdatNet
       => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
 
     /// <summary>
-    /// Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+    /// Finds the set of all elements in the first list not contained in the second list.
     /// </summary>
     /// <code>
     /// var set1 = new HashSet{int}(new int[] { 1, 2, 3, 4 }); 
@@ -441,6 +441,16 @@ namespace RamdatNet
     public static HashSet<T> Difference<T>(HashSet<T> a, HashSet<T> b)
       => new HashSet<T>(a.Where(t => !b.Contains(t)));
 
+    /// <summary>
+    /// Finds the set of all elements in the first list not contained in the second list. Duplication is determined according to the value returned by applying the supplied predicate to two list elements.
+    /// </summary>
+    /// <code>
+    /// var set1 = new HashSet{int}(new int[] { 1, 2, 3, 4 }); 
+    /// var set2 = new HashSet{int}(new int[] { 7, 6, -2, 4, 3 }); 
+    /// Func{int, int bool} cmp = (x, y) 
+    ///   => Math.Abs(x) == Math.Abs(y);
+    /// R.Difference(cmp)(set1, set2); //=> { 1 }
+    /// </code>
     public static Func<HashSet<T>, HashSet<T>, HashSet<T>> DifferenceWith<T>(Func<T, T, bool> Comparer)
       => (a, b) =>
       {
@@ -457,6 +467,18 @@ namespace RamdatNet
         return z;
       };
 
+    /// <summary>
+    /// Returns all but the first n elements of the given IEnumerable
+    /// </summary>
+    /// <code>
+    /// R.Drop(1, new string[] { "foo", "bar", "baz" }); 
+    ///   //=> { "bar", "baz" }
+    /// R.Drop(2, new string[] { "foo", "bar", "baz" }); 
+    ///   //=> { "baz" }
+    /// R.Drop(4, new string[] { "foo", "bar", "baz" }); 
+    ///   //=> {  }
+    /// R.Drop(3, "ramda"); //=> "da"
+    /// </code>
     public static Func<IEnumerable<T>, IEnumerable<T>> Drop<T>(int i)
       => list => list.Skip(i);
 
