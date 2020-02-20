@@ -1,13 +1,12 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RamdatNet;
 
 namespace RamdatNet.Tests
 {
   [TestClass]
   public class AllPassTests
   {
-    Predicate<int> checker
+    Predicate<int> Checker
       = R.AllPass(new Predicate<int>[] {
         x => x % 7 == 0,
         x => x > 10,
@@ -15,12 +14,17 @@ namespace RamdatNet.Tests
       });
 
     [TestMethod]
-    public void AllPass()
+    public void AllPass_Checker()
     {
-      Assert.IsTrue(checker(14));
-      Assert.IsFalse(checker(13));
-      Assert.IsFalse(checker(21));
-      Assert.IsFalse(checker(7));
+      Assert.IsTrue(Checker(14));
+      Assert.IsFalse(Checker(13));
+      Assert.IsFalse(Checker(21));
+      Assert.IsFalse(Checker(7));
+    }
+    [TestMethod]
+    public void AllPass_Empty_Predicate_List()
+    {
+      Assert.IsTrue(R.AllPass(new Predicate<int>[] { })(10));
     }
   }
 }

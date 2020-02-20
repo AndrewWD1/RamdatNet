@@ -106,7 +106,7 @@ namespace RamdatNet
       => y => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
 
     /// <summary>
-    /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
+    /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied. 
     /// </summary>
     /// <code>
     /// R.AllPass(new Predicate{int}[] {
@@ -171,7 +171,7 @@ namespace RamdatNet
     /// checker(1); //-> false
     /// </code>
     public static Predicate<T> AnyPass<T>(IEnumerable<Predicate<T>> predicateList)
-      => y => predicateList.Select(p => p(y)).Aggregate((a, c) => a || c);
+      => y => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
 
     /// <summary>
     /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
@@ -183,18 +183,18 @@ namespace RamdatNet
     /// }, 0); //-> true
     /// </code>
     public static bool AnyPass<T>(IEnumerable<Predicate<T>> predicateList, T y)
-      => predicateList.Select(p => p(y)).Aggregate((a, c) => a || c);
+      => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
 
     /// <summary>
     /// Ap applies a list of functions to a list of values.
     /// </summary>
     /// <code>
     /// R.Ap(
-    ///   new Func{int, int} { R.Multiply(2), R.Add(3) }, 
+    ///   new Func{int, int}[] { R.Multiply(2), R.Add(3) }, 
     ///   new int[] { 1, 2, 3 }
     /// );  //=> { 2, 4, 6, 4, 5, 6 }
     /// R.Ap(
-    ///   new Func{string, string} { R.Concat("tasty "), R.ToUpper }, 
+    ///   new Func{string, string}[] { R.Concat("tasty "), R.ToUpper }, 
     ///   new string[] { "pizza", "salad" }
     /// );  //=> { "tasty pizza", "tasty salad", "PIZZA", "SALAD" }
     /// </code>
@@ -329,6 +329,15 @@ namespace RamdatNet
     /// </code>
     public static string Concat(IEnumerable<string> list)
       => list.Aggregate("", (a, c) => a += c);
+
+    /// <summary>
+    /// When given a single string (as opposed to a list) it acts as a curried function that concatatenates the first argument with the second.
+    /// </summary>
+    /// <code>
+    /// R.Concat("ABC")("DEF"); // "ABCDEF"
+    /// </code>
+    public static Func<string, string> Concat(string str1)
+      => str2 => R.Concat(new string[] { str1, str2 });
 
     /// <summary>
     /// Returns the result of concatenating the given lists or strings.
@@ -535,6 +544,13 @@ namespace RamdatNet
     /// </summary>
     public static IEnumerable<K> Map<T, K>(Func<T, K> fn, IEnumerable<T> list)
       => list.Select(fn);
+
+    public static Func<int, int> Multiply(int x) => y => x * y;
+    public static Func<double, double> Multiply(double x) => y => x * y;
+    public static Func<decimal, decimal> Multiply(decimal x) => y => x * y;
+    public static int Multiply(int x, int y) => x * y;
+    public static double Multiply(double x, double y) => x * y;
+    public static decimal Multiply(decimal x, decimal y) => x * y;
 
     public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> list)
       => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
