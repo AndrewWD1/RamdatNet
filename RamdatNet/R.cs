@@ -85,8 +85,8 @@ namespace RamdatNet
     /// </summary>
     /// <code>
     /// int[] list = { 2, 4, 6 };
-    /// R.All(x => x % 2 == 0, list) //-> true 
-    /// R.All(x => x > 3, list) //-> false 
+    /// R.All((int x) => x % 2 == 0, list) //-> true 
+    /// R.All((int x)=> x > 3, list) //-> false 
     /// </code>
     public static bool All<T>(Predicate<T> p, IEnumerable<T> list)
       => list.Aggregate(true, (a, c) => a && p(c));
@@ -142,8 +142,8 @@ namespace RamdatNet
     /// </summary>
     /// <code>
     /// int[] list = { 2, 3, 5 };
-    /// R.Any(x => x % 2 == 0)(list); //-> true 
-    /// R.Any(x => x > 6)(list); //-> false 
+    /// R.Any((int x) => x % 2 == 0)(list); //-> true 
+    /// R.Any((int x) => x > 6)(list); //-> false 
     /// </code>
     public static Predicate<IEnumerable<T>> Any<T>(Predicate<T> p)
       => list => list.Aggregate(false, (a, c) => a || p(c));

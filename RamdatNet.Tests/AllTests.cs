@@ -12,8 +12,8 @@ namespace RamdatNet.Tests
       int[] b = { 2, 4, 6, 8, 9 };
       int[] c = { 2, 4, 6, 7, 9 };
 
-      Assert.IsTrue(R.All<int>(x => x % 2 == 0)(a));
-      Assert.IsFalse(R.All<int>(x => x % 2 == 0)(b));
+      Assert.IsTrue(R.All((int x) => x % 2 == 0)(a));
+      Assert.IsFalse(R.All((int x) => x % 2 == 0)(b));
       Assert.IsFalse(R.All<int>(x => x % 2 == 0)(c));
     }
     [TestMethod]
