@@ -21,8 +21,8 @@ namespace ExampleProject
       var CurriedAddThreeNumbers = R.Curry(AddThreeNumbers);
 
       CurriedAddThreeNumbers(1)(2)(3); //-> 6
-      CurriedAddThreeNumbers(1)(2);    //-> (int x) => x + 3
-      CurriedAddThreeNumbers(1);       //-> (int x) => (int y) => x + y + 1
+      CurriedAddThreeNumbers(1)(2);    //-> int x => x + 3
+      CurriedAddThreeNumbers(1);       //-> int x => int y => x + y + 1
 
     }
   }
