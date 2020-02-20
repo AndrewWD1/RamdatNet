@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\RamdatNet",
     "\\RamdatNet.Tests"
   ],
-  "SelectedNode": "\\RamdatNet.Tests\\AllPassTests.cs",
+  "SelectedNode": "\\RamdatNet.sln",
   "PreviewInSolutionExplorer": false
 }
