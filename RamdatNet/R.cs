@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -78,7 +78,7 @@ namespace RamdatNet
         /// R.All(x => x > 3)(list); //-> false 
         /// </code>
         public static Func<IEnumerable<T>, bool> All<T>(Predicate<T> p)
-          => list => list.Aggregate(true, (a, c) => a && p(c));
+            => list => list.Aggregate(true, (a, c) => a && p(c));
 
         /// <summary>
         /// Returns true if all elements of the list match the predicate, false if there are any that don't.
@@ -89,21 +89,21 @@ namespace RamdatNet
         /// R.All((int x)=> x > 3, list) //-> false 
         /// </code>
         public static bool All<T>(Predicate<T> p, IEnumerable<T> list)
-          => list.Aggregate(true, (a, c) => a && p(c));
+            => list.Aggregate(true, (a, c) => a && p(c));
 
         /// <summary>
         /// Curried. Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
         /// </summary>
         /// <code>
         /// Predicate{int} checker = R.AllPass(new Predicate{int}[] {
-        ///                 x => x % 2 == 0,
-        ///                 x => x > 1
-        ///              });
+        ///                             x => x % 2 == 0,
+        ///                             x => x > 1
+        ///                         });
         /// checker(4); //-> true
         /// checker(0); //-> false
         /// </code>
         public static Predicate<T> AllPass<T>(IEnumerable<Predicate<T>> predicateList)
-          => y => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
+            => y => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
 
         /// <summary>
         /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied. 
@@ -115,7 +115,7 @@ namespace RamdatNet
         /// }, 4); //-> true
         /// </code>
         public static bool AllPass<T>(IEnumerable<Predicate<T>> predicateList, T y)
-          => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
+            => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
 
         /// <summary>
         /// Returns a function that always returns the given value. Note that for non-primitives the value returned is a reference to the original value.
@@ -146,7 +146,7 @@ namespace RamdatNet
         /// R.Any((int x) => x > 6)(list); //-> false 
         /// </code>
         public static Predicate<IEnumerable<T>> Any<T>(Predicate<T> p)
-          => list => list.Aggregate(false, (a, c) => a || p(c));
+            => list => list.Aggregate(false, (a, c) => a || p(c));
 
         /// <summary>
         /// Returns true if at least one of the elements of the list match the predicate, false otherwise.
@@ -157,21 +157,21 @@ namespace RamdatNet
         /// R.Any(x => x > 6, list); //-> false 
         /// </code>
         public static bool Any<T>(Predicate<T> p, IEnumerable<T> list)
-          => list.Aggregate(false, (a, c) => a || p(c));
+            => list.Aggregate(false, (a, c) => a || p(c));
 
         /// <summary>
         /// Curried. Takes a list of predicates and returns a predicate that returns true for a given list of arguments if at least one of the provided predicates is satisfied by those arguments.
         /// </summary>
         /// <code>
         /// Predicate{int} checker = R.AnyPass(new Predicate{int}[] {
-        ///                 x => x % 2 == 0,
-        ///                 x => x > 1
-        ///              });
+        ///                             x => x % 2 == 0,
+        ///                             x => x > 1
+        ///                          });
         /// checker(0); //-> true
         /// checker(1); //-> false
         /// </code>
         public static Predicate<T> AnyPass<T>(IEnumerable<Predicate<T>> predicateList)
-          => y => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
+            => y => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
 
         /// <summary>
         /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
@@ -183,7 +183,7 @@ namespace RamdatNet
         /// }, 0); //-> true
         /// </code>
         public static bool AnyPass<T>(IEnumerable<Predicate<T>> predicateList, T y)
-          => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
+            => predicateList.Select(p => p(y)).Aggregate(false, (a, c) => a || c);
 
         /// <summary>
         /// Ap applies a list of functions to a list of values.
@@ -199,7 +199,7 @@ namespace RamdatNet
         /// );  //=> { "tasty pizza", "tasty salad", "PIZZA", "SALAD" }
         /// </code>
         public static IEnumerable<K> Ap<T, K>(IEnumerable<Func<T, K>> fns, IEnumerable<T> list)
-          => fns.Select(fn => list.Select(fn)).Aggregate((a, c) => a.Concat(c));
+            => fns.Select(fn => list.Select(fn)).Aggregate((a, c) => a.Concat(c));
 
         /// <summary>
         /// Curried. Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
@@ -213,7 +213,7 @@ namespace RamdatNet
         /// //=> {}
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<IEnumerable<T>>> Aperture<T>(int num)
-          => list => Aperture(num, list);
+            => list => Aperture(num, list);
 
         /// <summary>
         /// Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
@@ -248,7 +248,7 @@ namespace RamdatNet
         /// //=> { "write", "more", "tests" }
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> Append<T>(T t)
-          => list => Append(t, list);
+            => list => Append(t, list);
 
         /// <summary>
         /// Returns a new list containing the contents of the given list, followed by the given element.
@@ -272,7 +272,7 @@ namespace RamdatNet
         /// t42(R.Add(1)); //-> 43
         /// </code>
         public static Func<Func<T, K>, K> ApplyTo<T, K>(T t)
-          => fn => fn(t);
+            => fn => fn(t);
 
         /// <summary>
         /// Chain maps a function over a list and concatenates the results. chain is also known as flatMap in some libraries.
@@ -299,12 +299,12 @@ namespace RamdatNet
         /// R.Clamp(1, 10)( 4)  // => 4
         /// </code>
         public static Func<int, int> Clamp(int a, int b)
-          => c =>
-            {
-                if (c >= a && c <= b) return c;
-                else if (c < a) return a;
-                return b;
-            };
+            => c =>
+                {
+                    if (c >= a && c <= b) return c;
+                    else if (c < a) return a;
+                    return b;
+                };
 
         /// <summary>
         /// Performs right-to-left function composition. The last argument may have any arity; the remaining arguments must be unary.
@@ -319,7 +319,7 @@ namespace RamdatNet
         /// composed(6) //-> 0
         /// </code>
         public static Func<T, T> Compose<T>(IEnumerable<Func<T, T>> Fns)
-          => x => Fns.Reverse().Aggregate(x, (a, c) => c(a));
+            => x => Fns.Reverse().Aggregate(x, (a, c) => c(a));
 
         /// <summary>
         /// Returns the result of concatenating the given lists or strings.
@@ -328,7 +328,7 @@ namespace RamdatNet
         /// R.Concat(new string[] {"ABC", "DEF"}); // "ABCDEF"
         /// </code>
         public static string Concat(IEnumerable<string> list)
-          => list.Aggregate("", (a, c) => a += c);
+            => list.Aggregate("", (a, c) => a += c);
 
         /// <summary>
         /// When given a single string (as opposed to a list) it acts as a curried function that concatatenates the first argument with the second.
@@ -337,7 +337,7 @@ namespace RamdatNet
         /// R.Concat("ABC")("DEF"); // "ABCDEF"
         /// </code>
         public static Func<string, string> Concat(string str1)
-          => str2 => R.Concat(new string[] { str1, str2 });
+            => str2 => R.Concat(new string[] { str1, str2 });
 
         /// <summary>
         /// Returns the result of concatenating the given lists or strings.
@@ -347,97 +347,97 @@ namespace RamdatNet
         /// //=> { 4, 5, 6, 1, 2, 3 }
         /// </code>
         public static IEnumerable<T> Concat<T>(IEnumerable<IEnumerable<T>> list)
-          => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
+            => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Z>> Curry<T1, T2, Z>(Func<T1, T2, Z> Fn)
-          => t1 => t2 => Fn(t1, t2);
+            => t1 => t2 => Fn(t1, t2);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Z>>> Curry<T1, T2, T3, Z>(Func<T1, T2, T3, Z> Fn)
-          => t1 => t2 => t3 => Fn(t1, t2, t3);
+            => t1 => t2 => t3 => Fn(t1, t2, t3);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Z>>>> Curry<T1, T2, T3, T4, Z>(Func<T1, T2, T3, T4, Z> Fn)
-          => t1 => t2 => t3 => t4 => Fn(t1, t2, t3, t4);
+            => t1 => t2 => t3 => t4 => Fn(t1, t2, t3, t4);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Z>>>>> Curry<T1, T2, T3, T4, T5, Z>(Func<T1, T2, T3, T4, T5, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => Fn(t1, t2, t3, t4, t5);
+            => t1 => t2 => t3 => t4 => t5 => Fn(t1, t2, t3, t4, t5);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Z>>>>>> Curry<T1, T2, T3, T4, T5, T6, Z>(Func<T1, T2, T3, T4, T5, T6, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => Fn(t1, t2, t3, t4, t5, t6);
+            => t1 => t2 => t3 => t4 => t5 => t6 => Fn(t1, t2, t3, t4, t5, t6);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Z>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, Z>(Func<T1, T2, T3, T4, T5, T6, T7, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => Fn(t1, t2, t3, t4, t5, t6, t7);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => Fn(t1, t2, t3, t4, t5, t6, t7);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Z>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => Fn(t1, t2, t3, t4, t5, t6, t7, t8);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => Fn(t1, t2, t3, t4, t5, t6, t7, t8);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Z>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Z>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Z>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Z>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Z>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Z>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Z>>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
 
         /// <summary>
         /// Returns a curried version of the passed in function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Func<T16, Z>>>>>>>>>>>>>>>> Curry<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Z> Fn)
-          => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
+            => t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
 
         /// <summary>
         /// Finds the set of all elements in the first list not contained in the second list.
@@ -448,7 +448,7 @@ namespace RamdatNet
         /// R.Difference(set1, set2); //=> { 1, 2 }
         /// </code>
         public static HashSet<T> Difference<T>(HashSet<T> a, HashSet<T> b)
-          => new HashSet<T>(a.Where(t => !b.Contains(t)));
+            => new HashSet<T>(a.Where(t => !b.Contains(t)));
 
         /// <summary>
         /// Finds the set of all elements in the first list not contained in the second list. Duplication is determined according to the value returned by applying the supplied predicate to two list elements.
@@ -461,20 +461,20 @@ namespace RamdatNet
         /// R.Difference(cmp)(set1, set2); //=> { 1 }
         /// </code>
         public static Func<HashSet<T>, HashSet<T>, HashSet<T>> DifferenceWith<T>(Func<T, T, bool> Comparer)
-          => (a, b) =>
-          {
-              HashSet<T> z = new HashSet<T>();
-              foreach (T item1 in a)
-              {
-                  Boolean found = false;
-                  foreach (T item2 in b)
-                  {
-                      if (Comparer(item1, item2)) found = true;
-                  }
-                  if (!found) z.Add(item1);
-              }
-              return z;
-          };
+            => (a, b) =>
+            {
+                HashSet<T> z = new HashSet<T>();
+                foreach (T item1 in a)
+                {
+                    Boolean found = false;
+                    foreach (T item2 in b)
+                    {
+                        if (Comparer(item1, item2)) found = true;
+                    }
+                    if (!found) z.Add(item1);
+                }
+                return z;
+            };
 
         /// <summary>
         /// Returns all but the first n elements of the given IEnumerable
@@ -489,23 +489,23 @@ namespace RamdatNet
         /// R.Drop(3, "ramda"); //=> "da"
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> Drop<T>(int i)
-          => list => list.Skip(i);
+            => list => list.Skip(i);
 
         public static Func<IEnumerable<T>, IEnumerable<T>> DropLast<T>(int i)
-          => list => list.Take(list.Count() - i);
+            => list => list.Take(list.Count() - i);
 
         public static Func<IEnumerable<T>, IEnumerable<T>> DropLastWhile<T>(Predicate<T> Fn)
-          => list =>
-          {
-              var newList = list.Select(x => x).ToList();
-              int i = newList.Count() - 1;
-              while (Fn(newList[i]))
-              {
-                  newList.RemoveAt(i);
-                  i -= 1;
-              }
-              return newList;
-          };
+            => list =>
+            {
+                var newList = list.Select(x => x).ToList();
+                int i = newList.Count() - 1;
+                while (Fn(newList[i]))
+                {
+                    newList.RemoveAt(i);
+                    i -= 1;
+                }
+                return newList;
+            };
 
         public static IEnumerable<T> DropRepeats<T>(IList<T> list)
         where T : IComparable
@@ -521,29 +521,29 @@ namespace RamdatNet
         }
 
         public static Func<IList<T>, IEnumerable<T>> DropRepeatsWith<T>(Func<T, T, bool> Fn)
-         => list =>
-         {
-             List<T> newList = new List<T>();
-             if (list.Count() < 1) return newList;
-             newList.Add(list[0]);
-             for (int i = 1; i < list.Count(); i++)
-             {
-                 if (!Fn(list[i], list[i - 1])) newList.Add(list[i]);
-             }
-             return newList;
-         };
+          => list =>
+          {
+              List<T> newList = new List<T>();
+              if (list.Count() < 1) return newList;
+              newList.Add(list[0]);
+              for (int i = 1; i < list.Count(); i++)
+              {
+                  if (!Fn(list[i], list[i - 1])) newList.Add(list[i]);
+              }
+              return newList;
+          };
 
         /// <summary>
         /// Curried Map. Takes a function that acts on the elements of an IEnumrable and return a function that applies the function to each element of the IEnumerable and returns an IEnumarable.
         /// </summary>
         public static Func<IEnumerable<T>, IEnumerable<K>> Map<T, K>(Func<T, K> fn)
-          => list => list.Select(fn);
+            => list => list.Select(fn);
 
         /// <summary>
         /// Standard Map. Takes a function and an enumerable. Applies the function to each element of the enumerable, and returns the new Enumerable
         /// </summary>
         public static IEnumerable<K> Map<T, K>(Func<T, K> fn, IEnumerable<T> list)
-          => list.Select(fn);
+            => list.Select(fn);
 
         public static Func<int, int> Multiply(int x) => y => x * y;
         public static Func<double, double> Multiply(double x) => y => x * y;
@@ -553,28 +553,28 @@ namespace RamdatNet
         public static decimal Multiply(decimal x, decimal y) => x * y;
 
         public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> list)
-          => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
+            => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
 
         /// <summary>
         /// Curried Filter.
         /// </summary>
         public static Func<IEnumerable<T>, IEnumerable<T>> Filter<T>(Func<T, bool> fn)
-          => list => list.Where(fn);
+            => list => list.Where(fn);
 
         /// <summary>
         /// Standard Filter.
         /// </summary>
         public static IEnumerable<T> Filter<T>(Func<T, bool> fn, IEnumerable<T> list)
-          => list.Where(fn);
+            => list.Where(fn);
 
         public static Func<T, T> Pipe<T>(IEnumerable<Func<T, T>> Fns)
-          => x => Fns.Aggregate(x, (a, c) => c(a));
+            => x => Fns.Aggregate(x, (a, c) => c(a));
 
         /// <summary>
         /// Standard Reduce.
         /// </summary>
         public static K Reduce<T, K>(Func<T, K, K> fn, K seed, IEnumerable<T> list)
-          => list.Aggregate<T, K>(seed, (x, y) => fn(y, x));
+            => list.Aggregate<T, K>(seed, (x, y) => fn(y, x));
 
     }
 }
