@@ -1,3 +1,30 @@
 # RamdatNet
 
-Recreating the popular, functional JavaScript library for C#.
+Recreating the popular, functional JavaScript library Ramda in C# for .Net.
+
+Example of use:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using RamdatNet;
+
+namespace ExampleProject
+{
+  class Program
+  {
+    public static void Main(string[] args)
+    {
+      Func<int, int, int, int> AddThreeNumbers
+        = (x, y, z) => x + y + z;
+
+      var CurriedAddThreeNumbers = R.Curry(AddThreeNumbers);
+
+      CurriedAddThreeNumbers(1)(2)(3); //-> 6
+      CurriedAddThreeNumbers(1)(2);    //-> (int x) => x + 3
+      CurriedAddThreeNumbers(1);       //-> (int x) => (int y) => x + y + 1
+
+    }
+  }
+}
+```
