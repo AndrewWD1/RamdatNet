@@ -6,7 +6,7 @@ namespace RamdatNet.Tests
   [TestClass]
   public class AllPassTests
   {
-    Predicate<int> Checker
+    readonly Predicate<int> Checker
       = R.AllPass(new Predicate<int>[] {
         x => x % 7 == 0,
         x => x > 10,
