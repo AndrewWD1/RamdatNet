@@ -232,7 +232,7 @@ namespace RamdatNet
             if (num > list.Count()) return a;
 
             int i = 0;
-            while (i < list.Count() - num)
+            while (i <= list.Count() - num)
             {
                 a.Add(list.Skip(i).Take(num));
                 i += 1;
@@ -259,8 +259,10 @@ namespace RamdatNet
         /// </code>
         public static IEnumerable<T> Append<T>(T t, IEnumerable<T> list)
         {
-            List<T> newList = new List<T>(list);
-            newList.Add(t);
+            List<T> newList = new List<T>(list)
+            {
+                t
+            };
             return newList;
         }
 
