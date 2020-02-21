@@ -318,7 +318,7 @@ namespace RamdatNet
         ///       x => x % 7
         ///     })
         /// composed(8) //-> 2
-        /// composed(6) //-> 0
+        /// composed(6) //-> 7
         /// </code>
         public static Func<T, T> Compose<T>(IEnumerable<Func<T, T>> Fns)
             => x => Fns.Reverse().Aggregate(x, (a, c) => c(a));
