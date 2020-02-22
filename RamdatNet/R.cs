@@ -34,7 +34,7 @@ namespace RamdatNet
         /// Add two ints.
         /// </summary>
         /// <code>
-        /// R.Add(1)(2); //-> 3
+        /// R.Add(1, 2); //-> 3
         /// </code>
         public static int Add(int a, int b) => a + b;
 
@@ -42,7 +42,7 @@ namespace RamdatNet
         /// Add two doubles.
         /// </summary>
         /// <code>
-        /// R.Add(1)(2); //-> 3
+        /// R.Add(1, 2); //-> 3
         /// </code>
         public static double Add(double a, double b) => a + b;
 
@@ -50,7 +50,7 @@ namespace RamdatNet
         /// Add two decimals.
         /// </summary>
         /// <code>
-        /// R.Add(1)(2); //-> 3
+        /// R.Add(1, 2); //-> 3
         /// </code>
         public static decimal Add(decimal a, decimal b) => a + b;
 
@@ -445,8 +445,8 @@ namespace RamdatNet
         /// Finds the set of all elements in the first list not contained in the second list.
         /// </summary>
         /// <code>
-        /// var set1 = new HashSet{int}(new int[] { 1, 2, 3, 4 }); 
-        /// var set2 = new HashSet{int}(new int[] { 7, 6, 5, 4, 3 }); 
+        /// var set1 = new HashSet{int} { 1, 2, 3, 4 };
+        /// var set2 = new HashSet{int} { 7, 6, 5, 4, 3 };
         /// R.Difference(set1, set2); //=> { 1, 2 }
         /// </code>
         public static HashSet<T> Difference<T>(HashSet<T> a, HashSet<T> b)
@@ -456,11 +456,11 @@ namespace RamdatNet
         /// Finds the set of all elements in the first list not contained in the second list. Duplication is determined according to the value returned by applying the supplied predicate to two list elements.
         /// </summary>
         /// <code>
-        /// var set1 = new HashSet{int}(new int[] { 1, 2, 3, 4 }); 
-        /// var set2 = new HashSet{int}(new int[] { 7, 6, -2, 4, 3 }); 
-        /// Func{int, int bool} cmp = (x, y) 
+        /// var set1 = new HashSet{int} { 1, 2, 3, 4 }; 
+        /// var set2 = new HashSet{int} { 7, 6, -2, 4, 3 }; 
+        /// Func{int, int, bool} cmp = (x, y) 
         ///   => Math.Abs(x) == Math.Abs(y);
-        /// R.Difference(cmp)(set1, set2); //=> { 1 }
+        /// R.DifferenceWith(cmp)(set1, set2); //=> { 1 }
         /// </code>
         public static Func<HashSet<T>, HashSet<T>, HashSet<T>> DifferenceWith<T>(Func<T, T, bool> Comparer)
             => (a, b) =>
