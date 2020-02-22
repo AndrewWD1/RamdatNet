@@ -59,7 +59,7 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// int[] list = { 1, 2, 3 };
-        /// R.Adjust( 1, R.Add(1), list ); //-> { 1, 3, 3 } 
+        /// R.Adjust( 1, R.Add(1), list ); //-> { 1, 3, 3 }
         /// </code>
         public static List<T> Adjust<T>(int index, Func<T, T> fn, IList<T> list)
         {
@@ -74,8 +74,8 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// int[] list = { 2, 4, 6 };
-        /// R.All(x => x % 2 == 0)(list); //-> true 
-        /// R.All(x => x > 3)(list); //-> false 
+        /// R.All(x => x % 2 == 0)(list); //-> true
+        /// R.All(x => x > 3)(list); //-> false
         /// </code>
         public static Func<IEnumerable<T>, bool> All<T>(Predicate<T> p)
             => list => list.Aggregate(true, (a, c) => a && p(c));
@@ -85,8 +85,8 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// int[] list = { 2, 4, 6 };
-        /// R.All((int x) => x % 2 == 0, list) //-> true 
-        /// R.All((int x)=> x > 3, list) //-> false 
+        /// R.All((int x) => x % 2 == 0, list) //-> true
+        /// R.All((int x)=> x > 3, list) //-> false
         /// </code>
         public static bool All<T>(Predicate<T> p, IEnumerable<T> list)
             => list.Aggregate(true, (a, c) => a && p(c));
@@ -106,7 +106,7 @@ namespace RamdatNet
             => y => predicateList.Select(p => p(y)).Aggregate(true, (a, c) => a && c);
 
         /// <summary>
-        /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied. 
+        /// Takes a list of predicates and returns a predicate that returns true for a given argument if every one of the provided predicates is satisfied.
         /// </summary>
         /// <code>
         /// R.AllPass(new Predicate{int}[] {
@@ -142,8 +142,8 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// int[] list = { 2, 3, 5 };
-        /// R.Any((int x) => x % 2 == 0)(list); //-> true 
-        /// R.Any((int x) => x > 6)(list); //-> false 
+        /// R.Any((int x) => x % 2 == 0)(list); //-> true
+        /// R.Any((int x) => x > 6)(list); //-> false
         /// </code>
         public static Predicate<IEnumerable<T>> Any<T>(Predicate<T> p)
             => list => list.Aggregate(false, (a, c) => a || p(c));
@@ -153,8 +153,8 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// int[] list = { 2, 3, 5 };
-        /// R.Any(x => x % 2 == 0, list); //-> true 
-        /// R.Any(x => x > 6, list); //-> false 
+        /// R.Any(x => x % 2 == 0, list); //-> true
+        /// R.Any(x => x > 6, list); //-> false
         /// </code>
         public static bool Any<T>(Predicate<T> p, IEnumerable<T> list)
             => list.Aggregate(false, (a, c) => a || p(c));
@@ -190,11 +190,11 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// R.Ap(
-        ///   new Func{int, int}[] { R.Multiply(2), R.Add(3) }, 
+        ///   new Func{int, int}[] { R.Multiply(2), R.Add(3) },
         ///   new int[] { 1, 2, 3 }
         /// );  //=> { 2, 4, 6, 4, 5, 6 }
         /// R.Ap(
-        ///   new Func{string, string}[] { R.Concat("tasty "), R.ToUpper }, 
+        ///   new Func{string, string}[] { R.Concat("tasty "), R.ToUpper },
         ///   new string[] { "pizza", "salad" }
         /// );  //=> { "tasty pizza", "tasty salad", "PIZZA", "SALAD" }
         /// </code>
@@ -205,11 +205,11 @@ namespace RamdatNet
         /// Curried. Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
         /// </summary>
         /// <code>
-        /// R.Aperture(2)(new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(2)(new int[] { 1, 2, 3, 4, 5 });
         /// //=> { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 } }
-        /// R.Aperture(3)(new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(3)(new int[] { 1, 2, 3, 4, 5 });
         /// //=> { { 1, 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } }
-        /// R.Aperture(7)(new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(7)(new int[] { 1, 2, 3, 4, 5 });
         /// //=> {}
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<IEnumerable<T>>> Aperture<T>(int num)
@@ -219,11 +219,11 @@ namespace RamdatNet
         /// Returns a new list, composed of n-tuples of consecutive elements. If n is greater than the length of the list, an empty list is returned.
         /// </summary>
         /// <code>
-        /// R.Aperture(2, new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(2, new int[] { 1, 2, 3, 4, 5 });
         /// //=> { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 5 } }
-        /// R.Aperture(3, new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(3, new int[] { 1, 2, 3, 4, 5 });
         /// //=> { { 1, 2, 3 }, { 2, 3, 4 }, { 3, 4, 5 } }
-        /// R.Aperture(7, new int[] { 1, 2, 3, 4, 5 }); 
+        /// R.Aperture(7, new int[] { 1, 2, 3, 4, 5 });
         /// //=> {}
         /// </code>
         public static IEnumerable<IEnumerable<T>> Aperture<T>(int num, IEnumerable<T> list)
@@ -244,7 +244,7 @@ namespace RamdatNet
         /// Curried. Returns a new list containing the contents of the given list, followed by the given element.
         /// </summary>
         /// <code>
-        /// R.Append("tests")( new string[] { "write", "more" }); 
+        /// R.Append("tests")( new string[] { "write", "more" });
         /// //=> { "write", "more", "tests" }
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> Append<T>(T t)
@@ -254,7 +254,7 @@ namespace RamdatNet
         /// Returns a new list containing the contents of the given list, followed by the given element.
         /// </summary>
         /// <code>
-        /// R.Append("tests", new string[] { "write", "more" }); 
+        /// R.Append("tests", new string[] { "write", "more" });
         /// //=> { "write", "more", "tests" }
         /// </code>
         public static IEnumerable<T> Append<T>(T t, IEnumerable<T> list)
@@ -280,9 +280,9 @@ namespace RamdatNet
         /// Chain maps a function over a list and concatenates the results. chain is also known as flatMap in some libraries.
         /// </summary>
         /// <code>
-        /// Func{int, IEnumerable{int}} duplicate 
+        /// Func{int, IEnumerable{int}} duplicate
         ///   = n => new int[] { n, n };
-        /// R.Chain(duplicate, new int[] { 1, 2, 3 }); 
+        /// R.Chain(duplicate, new int[] { 1, 2, 3 });
         /// //-> { 1, 1, 2, 2, 3, 3 }
         /// </code>
         public static IEnumerable<K> Chain<T, K>(Func<T, IEnumerable<K>> fn, IEnumerable<T> list)
@@ -312,7 +312,7 @@ namespace RamdatNet
         /// Performs right-to-left function composition. The last argument may have any arity; the remaining arguments must be unary.
         /// </summary>
         /// <code>
-        /// Func{int, int} composed 
+        /// Func{int, int} composed
         ///   = R.Compose(new Func{int, int}[] {
         ///       x => x + 1,
         ///       x => x % 7
@@ -345,7 +345,7 @@ namespace RamdatNet
         /// Returns the result of concatenating the given lists or strings.
         /// </summary>
         /// <code>
-        /// R.concat(new int[] { { 4, 5, 6 }, { 1, 2, 3 } }); 
+        /// R.concat(new int[] { { 4, 5, 6 }, { 1, 2, 3 } });
         /// //=> { 4, 5, 6, 1, 2, 3 }
         /// </code>
         public static IEnumerable<T> Concat<T>(IEnumerable<IEnumerable<T>> list)
@@ -456,9 +456,9 @@ namespace RamdatNet
         /// Finds the set of all elements in the first list not contained in the second list. Duplication is determined according to the value returned by applying the supplied predicate to two list elements.
         /// </summary>
         /// <code>
-        /// var set1 = new HashSet{int} { 1, 2, 3, 4 }; 
-        /// var set2 = new HashSet{int} { 7, 6, -2, 4, 3 }; 
-        /// Func{int, int, bool} cmp = (x, y) 
+        /// var set1 = new HashSet{int} { 1, 2, 3, 4 };
+        /// var set2 = new HashSet{int} { 7, 6, -2, 4, 3 };
+        /// Func{int, int, bool} cmp = (x, y)
         ///   => Math.Abs(x) == Math.Abs(y);
         /// R.DifferenceWith(cmp)(set1, set2); //=> { 1 }
         /// </code>
@@ -482,16 +482,24 @@ namespace RamdatNet
         /// Returns all but the first n elements of the given IEnumerable
         /// </summary>
         /// <code>
-        /// R.Drop(1, new string[] { "foo", "bar", "baz" }); 
+        /// R.Drop(1)( new string[] { "foo", "bar", "baz" });
         ///   //=> { "bar", "baz" }
-        /// R.Drop(2, new string[] { "foo", "bar", "baz" }); 
+        /// R.Drop(2)( new string[] { "foo", "bar", "baz" });
         ///   //=> { "baz" }
-        /// R.Drop(4, new string[] { "foo", "bar", "baz" }); 
+        /// R.Drop(4)( new string[] { "foo", "bar", "baz" });
         ///   //=> {  }
-        /// R.Drop(3, "ramda"); //=> "da"
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> Drop<T>(int i)
             => list => list.Skip(i);
+
+        /// <summary>
+        /// Returns all but the first n elements of the given IEnumerable
+        /// </summary>
+        /// <code>
+        /// R.Drop(3)( "ramda"); //=> "da"
+        /// </code>
+        public static Func<string, string> Drop(int i)
+            => list => String.Join("", list.Skip(i));
 
         public static Func<IEnumerable<T>, IEnumerable<T>> DropLast<T>(int i)
             => list => list.Take(list.Count() - i);
@@ -548,10 +556,15 @@ namespace RamdatNet
             => list.Select(fn);
 
         public static Func<int, int> Multiply(int x) => y => x * y;
+
         public static Func<double, double> Multiply(double x) => y => x * y;
+
         public static Func<decimal, decimal> Multiply(decimal x) => y => x * y;
+
         public static int Multiply(int x, int y) => x * y;
+
         public static double Multiply(double x, double y) => x * y;
+
         public static decimal Multiply(decimal x, decimal y) => x * y;
 
         public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> list)
@@ -577,6 +590,5 @@ namespace RamdatNet
         /// </summary>
         public static K Reduce<T, K>(Func<T, K, K> fn, K seed, IEnumerable<T> list)
             => list.Aggregate<T, K>(seed, (x, y) => fn(y, x));
-
     }
 }
