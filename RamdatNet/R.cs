@@ -526,11 +526,11 @@ namespace RamdatNet
             => list => String.Join("", list.Take(list.Count() - i));
 
         /// <summary>
-        /// Returns a new list excluding all the tailing elements of a given list which satisfy the supplied predicate function. 
+        /// Returns a new list excluding all the tailing elements of a given list which satisfy the supplied predicate function.
         /// </summary>
         /// <code>
         /// Predicate{int} lteThree = (int x) => 3 >= x;
-        /// R.DropLastWhile(lteThree)( new int[] { 1, 2, 3, 4, 3, 2, 1 }); 
+        /// R.DropLastWhile(lteThree)( new int[] { 1, 2, 3, 4, 3, 2, 1 });
         /// //=> { 1, 2, 3, 4 }
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> DropLastWhile<T>(Predicate<T> Fn)
@@ -547,7 +547,7 @@ namespace RamdatNet
             };
 
         /// <summary>
-        /// Returns a new list excluding all the tailing elements of a given list which satisfy the supplied predicate function. 
+        /// Returns a new list excluding all the tailing elements of a given list which satisfy the supplied predicate function.
         /// </summary>
         /// <code>
         /// R.DropLastWhile(x => x !== "d")("Ramda"); //=> "Ramd"
@@ -569,7 +569,7 @@ namespace RamdatNet
         /// Returns a new list without any consecutively repeating elements.
         /// </summary>
         /// <code>
-        /// R.DropRepeats(new int[] { 1, 1, 1, 2, 3, 4, 4, 2, 2 }); 
+        /// R.DropRepeats(new int[] { 1, 1, 1, 2, 3, 4, 4, 2, 2 });
         /// //=> { 1, 2, 3, 4, 2 }
         /// </code>
         public static IEnumerable<T> DropRepeats<T>(IList<T> list)
@@ -630,7 +630,7 @@ namespace RamdatNet
         /// Returns a new list without any consecutively repeating elements. Equality is determined by applying the supplied predicate to each pair of consecutive elements. The first element in a series of equal elements will be preserved.
         /// </summary>
         /// <code>
-        /// R.DropRepeats((x, y) => $"{x}{y}" == "rr")("rraammddaa"); 
+        /// R.DropRepeats((x, y) => $"{x}{y}" == "rr")("rraammddaa");
         /// //=> "raammddaa"
         /// </code>
         public static Func<string, string> DropRepeatsWith(Func<char, char, bool> Fn)
@@ -648,14 +648,73 @@ namespace RamdatNet
             };
 
         /// <summary>
+        /// Returns a new list excluding the leading elements of a given list which satisfy the supplied predicate function.
+        /// </summary>
+        /// <code>
+        /// Predicate{int} LteTwo = x => 2 >= x;
+        /// R.DropWhile(LteTwo)( { 1, 2, 3, 4, 3, 2, 1 }); 
+        /// //=> { 3, 4, 3, 2, 1 }
+        /// </code>
+        public static Func<IEnumerable<T>, IEnumerable<T>> DropWhile<T>(Predicate<T> Fn)
+            => e =>
+            {
+                var prevList = e.ToList();
+                var newList = new List<T>();
+
+                int i = 0;
+                while (Fn(prevList[i]))
+                    i += 1;
+
+                return e.Skip(i);
+            };
+
+        /// <summary>
+        /// Returns a new list excluding the leading elements of a given list which satisfy the supplied predicate function.
+        /// </summary>
+        /// <code>
+        /// R.dropWhile(x => x !== 'd' , 'Ramda'); 
+        /// //=> 'da'
+        /// </code>
+        public static Func<string, string> DropWhile(Predicate<char> Fn)
+            => str =>
+            {
+                var prevList = str.ToCharArray();
+                var newList = new List<char>();
+
+                int i = 0;
+                while (Fn(prevList[i]))
+                    i += 1;
+
+                return String.Join("", str.Skip(i));
+            };
+
+        /// <summary>
+        /// Takes a function and two values in its domain and returns true if the values map to the same value in the codomain; false otherwise.
+        /// </summary>
+        /// <code>
+        /// R.EqBy(Math.Abs, 5, -5); 
+        /// //=> true
+        /// </code>
+        public static Func<T, T, bool> EqBy<T>(Func<T, T> Fn)
+            => (x, y) => Fn(x).Equals(Fn(y));
+
+        /// <summary>
         /// Curried Map. Takes a function that acts on the elements of an IEnumrable and return a function that applies the function to each element of the IEnumerable and returns an IEnumarable.
         /// </summary>
+        /// <code>
+        /// R.Map((int x)=> x * 2)(new int[] { 1, 2, 3 });
+        /// //=> { 2, 4, 6}
+        /// </code>
         public static Func<IEnumerable<T>, IEnumerable<K>> Map<T, K>(Func<T, K> fn)
             => list => list.Select(fn);
 
         /// <summary>
         /// Standard Map. Takes a function and an enumerable. Applies the function to each element of the enumerable, and returns the new Enumerable
         /// </summary>
+        /// <code>
+        /// R.Map((int x)=> x * 2, new int[] { 1, 2, 3 });
+        /// //=> { 2, 4, 6}
+        /// </code>
         public static IEnumerable<K> Map<T, K>(Func<T, K> fn, IEnumerable<T> list)
             => list.Select(fn);
 
@@ -677,12 +736,21 @@ namespace RamdatNet
         /// <summary>
         /// Curried Filter.
         /// </summary>
+        /// <code>
+        /// R.Filer(x => x % 2 == 0)(new int[] { 1, 2, 3, 4 });
+        /// //=> { 2, 4 }
+        /// </code>
         public static Func<IEnumerable<T>, IEnumerable<T>> Filter<T>(Func<T, bool> fn)
             => list => list.Where(fn);
 
         /// <summary>
         /// Standard Filter.
         /// </summary>
+        /// <code>
+        /// R.Filer(x => x % 2 == 0, new int[] { 1, 2, 3, 4 });
+        /// //=> { 2, 4 }
+        /// </code>
+
         public static IEnumerable<T> Filter<T>(Func<T, bool> fn, IEnumerable<T> list)
             => list.Where(fn);
 
