@@ -733,7 +733,7 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// HasA[] xs = { new HasA(a: 1), new HasA(a: 2), new HasA(a: 3) };
-        /// R.Find(R.PropEq{HasA, int}("a", 2))(xs);; //=> {a: 2};
+        /// R.Find(R.PropEq{HasA, int}("a", 2))(xs); //=> {a: 2};
         /// R.Find(R.PropEq{HasA, int}("a", 4))(xs); //=> null; 
         /// </code>
         public static Func<IEnumerable<T>, T> Find<T>(Func<T, bool> fn)
@@ -744,11 +744,46 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// HasA[] xs = { new HasA(a: 1), new HasA(a: 2), new HasA(a: 3) };
-        /// R.Find(R.PropEq{HasA, int}("a", 2), xs);; //=> {a: 2};
+        /// R.Find(R.PropEq{HasA, int}("a", 2), xs); //=> {a: 2};
         /// R.Find(R.PropEq{HasA, int}("a", 4), xs); //=> null; 
         /// </code>
         public static T Find<T>(Func<T, bool> fn, IEnumerable<T> list)
             => Find(fn)(list);
+
+        /// <summary>
+        /// Curried. Returns the index of the first element of the list which matches the predicate, or -1 if no element matches.
+        /// </summary>
+        /// <code>
+        /// HasB[] list = { new HasB(1), new HasB(3) };
+        /// var result = R.FindIndex((HasB x) => x.B == 5)(list);
+        /// </code>
+        public static Func<IList<T>, int> FindIndex<T>(Func<T, bool> fn)
+            => list =>
+            {
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    if (fn(list[i]))
+                        return i;
+                }
+                return -1;
+            };
+
+        /// <summary>
+        /// Returns the index of the first element of the list which matches the predicate, or -1 if no element matches.
+        /// </summary>
+        /// <code>
+        /// HasB[] list = { new HasB(1), new HasB(3) };
+        /// var result = R.FindIndex((HasB x) => x.B == 5)(list);
+        /// </code>
+        public static int FindIndex<T>(Func<T, bool> fn, IList<T> list)
+        {
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (fn(list[i]))
+                    return i;
+            }
+            return -1;
+        }
 
         /// <summary>
         /// Curried Map. Takes a function that acts on the elements of an IEnumrable and return a function that applies the function to each element of the IEnumerable and returns an IEnumarable.
