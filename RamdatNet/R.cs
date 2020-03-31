@@ -698,6 +698,58 @@ namespace RamdatNet
         public static Func<T, T, bool> EqBy<T>(Func<T, T> Fn)
             => (x, y) => Fn(x).Equals(Fn(y));
 
+
+
+        /// <summary>
+        /// A function that always returns false.
+        /// </summary>
+        /// <code>
+        /// R.F(); //=> false
+        /// </code>
+        public static bool F() => false;
+
+        /// <summary>
+        /// Curried Filter. Takes a predicate and a Enumerable, and returns a new Enumerable of the same type containing the members of the given filterable which satisfy the given predicate.
+        /// </summary>
+        /// <code>
+        /// R.Filter((int x) => x % 2 == 0)(new int[] { 1, 2, 3, 4 });
+        /// //=> { 2, 4 }
+        /// </code>
+        public static Func<IEnumerable<T>, IEnumerable<T>> Filter<T>(Func<T, bool> fn)
+            => list => list.Where(fn);
+
+        /// <summary>
+        /// Standard Filter.
+        /// </summary>
+        /// <code>
+        /// R.Filter((int x) => x % 2 == 0, new int[] { 1, 2, 3, 4 });
+        /// //=> { 2, 4 }
+        /// </code>
+        public static IEnumerable<T> Filter<T>(Func<T, bool> fn, IEnumerable<T> list)
+            => list.Where(fn);
+
+        /// <summary>
+        /// Curried. Returns the first element of the list which matches the predicate, or null if no element matches.
+        /// </summary>
+        /// <code>
+        /// HasA[] xs = { new HasA(a: 1), new HasA(a: 2), new HasA(a: 3) };
+        /// R.Find(R.PropEq{HasA, int}("a", 2))(xs);; //=> {a: 2};
+        /// R.Find(R.PropEq{HasA, int}("a", 4))(xs); //=> null; 
+        /// </code>
+        public static Func<IEnumerable<T>, T> Find<T>(Func<T, bool> fn)
+            => list => list.FirstOrDefault(fn);
+
+        /// <summary>
+        /// Returns the first element of the list which matches the predicate, or null if no element matches.
+        /// </summary>
+        /// <code>
+        /// HasA[] xs = { new HasA(a: 1), new HasA(a: 2), new HasA(a: 3) };
+        /// R.Find(R.PropEq{HasA, int}("a", 2), xs);; //=> {a: 2};
+        /// R.Find(R.PropEq{HasA, int}("a", 4), xs); //=> null; 
+        /// </code>
+        public static T Find<T>(Func<T, bool> fn, IEnumerable<T> list)
+            => Find(fn)(list);
+
         /// <summary>
         /// Curried Map. Takes a function that acts on the elements of an IEnumrable and return a function that applies the function to each element of the IEnumerable and returns an IEnumarable.
         /// </summary>
@@ -706,7 +758,7 @@ namespace RamdatNet
         /// //=> { 2, 4, 6}
         /// </code>
         public static Func<IEnumerable<T>, IEnumerable<K>> Map<T, K>(Func<T, K> fn)
-            => list => list.Select(fn);
+        => list => list.Select(fn);
 
         /// <summary>
         /// Standard Map. Takes a function and an enumerable. Applies the function to each element of the enumerable, and returns the new Enumerable
@@ -733,29 +785,20 @@ namespace RamdatNet
         public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> list)
             => list.Aggregate(new List<T>(), (a, c) => a.Concat(c).ToList());
 
-        /// <summary>
-        /// Curried Filter.
-        /// </summary>
-        /// <code>
-        /// R.Filer(x => x % 2 == 0)(new int[] { 1, 2, 3, 4 });
-        /// //=> { 2, 4 }
-        /// </code>
-        public static Func<IEnumerable<T>, IEnumerable<T>> Filter<T>(Func<T, bool> fn)
-            => list => list.Where(fn);
-
-        /// <summary>
-        /// Standard Filter.
-        /// </summary>
-        /// <code>
-        /// R.Filer(x => x % 2 == 0, new int[] { 1, 2, 3, 4 });
-        /// //=> { 2, 4 }
-        /// </code>
-
-        public static IEnumerable<T> Filter<T>(Func<T, bool> fn, IEnumerable<T> list)
-            => list.Where(fn);
 
         public static Func<T, T> Pipe<T>(IEnumerable<Func<T, T>> Fns)
             => x => Fns.Aggregate(x, (a, c) => c(a));
+
+        public static Func<T, bool> PropEq<T, K>(string prop, K val)
+        where K : IComparable
+            => t =>
+            {
+                var t1 = t.GetType();
+                var t2 = t1.GetProperty(prop);
+                var t3 = t2.GetValue(t);
+                var t4 = val.CompareTo(t3) == 0;
+                return t4;
+            };
 
         /// <summary>
         /// Standard Reduce.
