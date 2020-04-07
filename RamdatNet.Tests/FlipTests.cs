@@ -9,14 +9,20 @@ namespace RamdatNet.Tests
         [TestMethod]
         public void FlipTests_Docs()
         {
-            int[] mergeThree(params int[] args)
+            int[] mergeArgs(params int[] args)
             {
                 return args;
             }
 
-            var result = R.Flip<int, int[]>(mergeThree)(1, 2, 3);
+            var result = R.Flip<int, int[]>(mergeArgs)(1, 2, 3);
 
             CollectionAssert.AreEqual(new int[] { 2, 1, 3 }, result);
+
+            var result2 = R.Flip<int, int[]>(mergeArgs)(1, 2, 3, 4);
+
+            CollectionAssert.AreEqual(new int[] { 2, 1, 3, 4 }, result2);
+
+
         }
 
         [TestMethod]

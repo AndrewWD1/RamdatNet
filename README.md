@@ -35,19 +35,22 @@ namespace ExampleProject
       /**
        *  Flip a methods first two parameters
        */
-      int[] mergeThree(params int[] args)
+      int[] mergeArgs(params int[] args)
       {
           return args;
       }
 
-      mergeThree(1, 2, 3)
+      mergeArgs(1, 2, 3)
         //-> { 1, 2, 3 }
 
-      var flippedMergeThree
-        = R.Flip(mergeThree);
+      var flippedMergeArgs
+        = R.Flip(mergeArgs);
 
-      flippedMergeThree(1, 2, 3);
+      flippedMergeArgs(1, 2, 3);
         //-> { 2, 1, 3 }
+
+      flippedMergeArgs(1, 2, 3, 4);
+        //-> { 2, 1, 3, 4 }
     }
   }
 }
