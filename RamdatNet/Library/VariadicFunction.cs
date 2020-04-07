@@ -7,12 +7,12 @@ namespace RamdatNet.Library
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="K"></typeparam>
     /// <returns></returns>
-    public delegate K SpreadFunction<T, K>(params T[] args);
+    public delegate K VariadicFunction<T, K>(params T[] args);
 
     /// <summary>
     /// Represents a method that takes a abritrary number of objects of arbitrary types
     /// </summary>
     /// <param name="args"></param>
     /// <returns></returns>
-    public delegate object SpreadFunction(params object[] args);
+    public delegate object VariadicFunction(params object[] args);
 }

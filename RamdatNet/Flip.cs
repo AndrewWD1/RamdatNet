@@ -16,7 +16,7 @@ namespace RamdatNet
         /// }
         /// R.Flip{int, int[]}(mergeThree)(1, 2, 3) // => { 2, 1, 3}
         /// </code>
-        public static SpreadFunction<T, K> Flip<T, K>(SpreadFunction<T, K> fn)
+        public static VariadicFunction<T, K> Flip<T, K>(VariadicFunction<T, K> fn)
         {
             K NewFunction(params T[] args)
             {
@@ -42,7 +42,7 @@ namespace RamdatNet
         /// <code>
         /// 
         /// </code>
-        public static SpreadFunction Flip(SpreadFunction fn)
+        public static VariadicFunction Flip(VariadicFunction fn)
         {
             object NewFunction(params object[] args)
             {
