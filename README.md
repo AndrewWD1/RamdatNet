@@ -2,7 +2,7 @@
 
 Recreating the popular, functional JavaScript library Ramda in C# for .Net.
 
-Example of using RamdatNet to Flip a method's first two parameters:
+Example of using RamdatNet to flip a method's first two parameters:
 
 ```csharp
 using System;
