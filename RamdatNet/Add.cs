@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RamdatNet
@@ -53,5 +54,26 @@ namespace RamdatNet
         /// R.Add(1, 2); //-> 3
         /// </code>
         public static decimal Add(decimal a, decimal b) => a + b;
+        /// <summary>
+        /// Add an arbitrary number of ints
+        /// </summary>
+        /// <code>
+        /// R.Add(1,2,3,4,5); //-> 15
+        /// </code>
+        public static int Add(params int[] list) => list.Aggregate((a, c) => a + c);
+        /// <summary>
+        /// Add an arbitrary number of doubles
+        /// </summary>
+        /// <code>
+        /// R.Add(1,2,3,4,5); //-> 15
+        /// </code>
+        public static double Add(params double[] list) => list.Aggregate((a, c) => a + c);
+        /// <summary>
+        /// Add an arbitrary number of decimals
+        /// </summary>
+        /// <code>
+        /// R.Add(1,2,3,4,5); //-> 15
+        /// </code>
+        public static decimal Add(params decimal[] list) => list.Aggregate((a, c) => a + c);
     }
 }

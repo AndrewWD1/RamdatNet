@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RamdatNet
@@ -17,5 +18,11 @@ namespace RamdatNet
         public static double Multiply(double x, double y) => x * y;
 
         public static decimal Multiply(decimal x, decimal y) => x * y;
+
+        public static int Multiply(params int[] list) => list.Aggregate((a, c) => a * c);
+
+        public static double Multiply(params double[] list) => list.Aggregate((a, c) => a * c);
+
+        public static decimal Multiply(params decimal[] list) => list.Aggregate((a, c) => a * c);
     }
 }
