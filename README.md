@@ -2,7 +2,7 @@
 
 Recreating the popular, functional JavaScript library Ramda in C# for .Net.
 
-Example of use:
+Example of using RamdatNet to Flip a method's first two parameters:
 
 ```csharp
 using System;
@@ -16,7 +16,7 @@ namespace ExampleProject
     public static void Main(string[] args)
     {
       /**
-       *  Flip a methods first two parameters
+       *  Flip a method's first two parameters
        */
 
       int[] mergeArgs(params int[] args)
@@ -35,10 +35,26 @@ namespace ExampleProject
 
       flippedMergeArgs(1, 2, 3, 4);
         //-> { 2, 1, 3, 4 }
+    }
+  }
+}
+```
 
+Example of using RamdatNet to curry a function:
 
+```csharp
+using System;
+using System.Collections.Generic;
+using RamdatNet;
+
+namespace ExampleProject
+{
+  class Program
+  {
+    public static void Main(string[] args)
+    {
       /**
-       * Currying Functions
+       * Currying a function
        */
 
       Func<int, int, int, int> AddThreeNumbers
