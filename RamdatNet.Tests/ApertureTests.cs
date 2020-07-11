@@ -17,14 +17,14 @@ namespace RamdatNet.Tests
             List<List<int>> expected = new List<List<int>> { new List<int> { 1, 2 }, new List<int> { 2, 3 }, new List<int> { 3, 4 }, new List<int> { 4, 5 } };
 
             /**
-            *   * Have to use a loop since CollectionAssert.AreEqual only tests equality on-level deep.
+            *   * Have to use a loop since CollectionAssert.AreEqual only tests equality one-level deep.
             */
             for (int i = 0; i < expected.Count(); i++)
             {
                 CollectionAssert.AreEqual(result[i].ToArray(), expected[i]);
             }
-
         }
+
         [TestMethod]
         public void ApertureTests_ints_3()
         {
