@@ -1,7 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RamdatNet
+namespace RamdatNet.Tests
 {
     [TestClass]
     public class MemoizeTests
