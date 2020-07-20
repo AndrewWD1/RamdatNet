@@ -21,5 +21,8 @@ namespace RamdatNet
         /// </code>
         public static Func<T, T> Compose<T>(IEnumerable<Func<T, T>> Fns)
             => x => Fns.Reverse().Aggregate(x, (a, c) => c(a));
+
+        public static Func<T, Z> Compose<T, K, Z>(Func<K, Z> f, Func<T, K> g)
+            => x => f(g(x));
     }
 }
