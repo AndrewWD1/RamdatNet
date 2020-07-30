@@ -18,9 +18,7 @@ namespace RamdatNet
             List<int> newList = new List<int>((IEnumerable<int>)list);
 
             for (int i = end; 0 < i; i--)
-            {
                 newList.RemoveAt(start);
-            }
 
             return (IList<T>)newList;
         }
