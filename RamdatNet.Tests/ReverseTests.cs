@@ -1,16 +1,30 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RamdatNet.Tests
 {
     [TestClass]
-    internal class ReverseTests
+    public class ReverseTests
     {
         [TestMethod]
-        public void ReverseTests_Docs()
+        public void ReverseTests_Docs_Array()
         {
+            CollectionAssert.AreEqual(
+                R.Reverse(new int[] { 1, 2, 3 }).ToArray(),
+                new int[] { 3, 2, 1 }
+            );
+        }
+
+        [TestMethod]
+        public void ReverseTests_Docs_String()
+        {
+            Assert.AreEqual(
+                R.Reverse("abc"),
+                "cba"
+            );
         }
     }
 }
