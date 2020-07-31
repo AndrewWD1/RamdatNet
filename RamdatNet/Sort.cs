@@ -13,7 +13,6 @@ namespace RamdatNet
         /// static int diff(int a, int b) => a - b;
         /// R.Sort(diff, new int[] { 4, 2, 7, 5 }); //=> { 2, 4, 5, 7 }
         /// </code>
-
         public static IEnumerable<T> Sort<T>(Comparison<T> fn, IEnumerable<T> list)
         {
             var newList = new List<T>(list);

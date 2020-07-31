@@ -11,8 +11,8 @@ namespace RamdatNet
         /// Similarly, checks if a string starts with the provided substring.
         /// </summary>
         /// <code>
-        /// R.StartsWith(new char[] { 'a' }, new char[] { 'a', 'b', 'c' }); //=> true
-        /// R.StartsWith(new char[] { 'b' }, new char[] { 'a', 'b', 'c' }); //=> false
+        /// R.StartsWith(new char[] { 'a' })(new char[] { 'a', 'b', 'c' }); //=> true
+        /// R.StartsWith(new char[] { 'b' })(new char[] { 'a', 'b', 'c' }); //=> false
         /// </code>
         public static Func<IList<T>, bool> StartsWith<T>(IList<T> subList)
             where T : IComparable
@@ -34,8 +34,8 @@ namespace RamdatNet
         /// Similarly, checks if a string starts with the provided substring.
         /// </summary>
         /// <code>
-        /// R.StartsWith("a", "abc"); //=> true
-        /// R.StartsWith("b", "abc");  //=> false
+        /// R.StartsWith("a")("abc"); //=> true
+        /// R.StartsWith("b")("abc");  //=> false
         /// </code>
         public static Func<string, bool> StartsWith(string subString)
             => str => str.StartsWith(subString);
