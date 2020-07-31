@@ -17,8 +17,8 @@ namespace RamdatNet
         {
             var newList = new List<T>();
 
-            var _a = a % list.Count();
-            var _b = b % list.Count();
+            var _a = Mod(a, list.Count());
+            var _b = Mod(b, list.Count());
 
             for (int i = _a; i < _b; i++)
                 newList.Add(list[i]);
