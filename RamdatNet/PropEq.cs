@@ -6,15 +6,20 @@ namespace RamdatNet
 {
     public partial class R
     {
-        public static Func<T, bool> PropEq<T, K>(string prop, K val)
-        where K : IComparable
+        public static Func<K, bool> PropEq<K, T>(string prop, T val)
+        where T : IComparable
             => t =>
             {
-                var t1 = t.GetType();
-                var t2 = t1.GetProperty(prop);
-                var t3 = t2.GetValue(t);
-                var t4 = val.CompareTo(t3) == 0;
-                return t4;
+                var foundVal = Prop(prop)(t);
+                return val.CompareTo(foundVal) == 0;
+            };
+
+        public static Func<object, bool> PropEq<T>(string prop, T val)
+        where T : IComparable
+            => t =>
+            {
+                var foundVal = Prop(prop)(t);
+                return val.CompareTo(foundVal) == 0;
             };
     }
 }
