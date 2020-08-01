@@ -6,7 +6,7 @@ namespace RamdatNet
     public partial class R
     {
         /// <summary>
-        /// Returns the position of the first occurrence of an item in an array, or -1 if the item is not included in the array. 
+        /// Returns the position of the first occurrence of an item in an array, or -1 if the item is not included in the array.
         /// </summary>
         /// <code>
         /// R.IndexOf(3, new int[] { 1,2,3,4 }); //=> 2

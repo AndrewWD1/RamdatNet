@@ -28,6 +28,7 @@ namespace RamdatNet.Tests
 
             Assert.AreEqual((decimal)1.001 + (decimal)2.000012, result);
         }
+
         [TestMethod]
         public void Add_Arbitrary()
         {

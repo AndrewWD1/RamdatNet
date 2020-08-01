@@ -18,6 +18,7 @@ namespace RamdatNet
             {
                 return t.GetType().GetProperty(prop) != null;
             };
+
         public static Func<object, bool> Has(string prop)
             => t =>
             {

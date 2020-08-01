@@ -1,5 +1,5 @@
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace RamdatNet.Tests
 {
@@ -31,6 +31,5 @@ namespace RamdatNet.Tests
 
             Assert.AreEqual(result4, expected4);
         }
-
     }
 }

@@ -11,7 +11,7 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// R.Intersperse('a')( new char[] { 'b', 'n', 'n', 's' }); //=> { 'b', 'a', 'n', 'a', 'n', 'a', 's' }
-        /// </code> 
+        /// </code>
         public static Func<IList<T>, IList<T>> Intersperse<T>(T t)
             => list =>
             {
@@ -35,7 +35,7 @@ namespace RamdatNet
         /// </summary>
         /// <code>
         /// R.Intersperse('a')( new char[] { 'b', 'n', 'n', 's' }); //=> { 'b', 'a', 'n', 'a', 'n', 'a', 's' }
-        /// </code> 
+        /// </code>
         public static IList<T> Intersperse<T>(T t, IList<T> list)
             => Intersperse(t)(list);
     }

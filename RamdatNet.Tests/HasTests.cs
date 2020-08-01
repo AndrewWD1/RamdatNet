@@ -17,9 +17,6 @@ namespace RamdatNet.Tests
             Assert.IsTrue(result1);
             Assert.IsTrue(result2);
             Assert.IsFalse(result3);
-
-
         }
-
     }
 }

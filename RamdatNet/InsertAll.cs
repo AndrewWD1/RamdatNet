@@ -6,7 +6,7 @@ namespace RamdatNet
     public partial class R
     {
         /// <summary>
-        /// Inserts the supplied element into the list, at the specified index. Note that this is not destructive: it returns a copy of the list with the changes.  
+        /// Inserts the supplied element into the list, at the specified index. Note that this is not destructive: it returns a copy of the list with the changes.
         /// </summary>
         /// <code>
         /// R.InsertAll(2, new int[] { 7, 8, 9 }, new int[] { 1, 2, 3, 4 }); //=> { 1, 2, 7, 8, 9, 3, 4 }

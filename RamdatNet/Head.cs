@@ -6,7 +6,7 @@ namespace RamdatNet
     public partial class R
     {
         /// <summary>
-        /// Returns the first element of the given list or string. In some libraries this function is named first.  
+        /// Returns the first element of the given list or string. In some libraries this function is named first.
         /// </summary>
         /// <code>
         /// R.Head(new string[] { "fi", "fo", "fum" } ); //=> "fi"
@@ -23,7 +23,7 @@ namespace RamdatNet
         }
 
         /// <summary>
-        /// Returns the first element of the given list or string. In some libraries this function is named first.  
+        /// Returns the first element of the given list or string. In some libraries this function is named first.
         /// </summary>
         /// <code>
         /// R.Head(new string[] { "fi", "fo", "fum" } ); //=> "fi"

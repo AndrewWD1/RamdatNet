@@ -12,6 +12,5 @@ namespace RamdatNet.Tests
             Assert.AreEqual(10, R.Clamp(1, 10)(15));
             Assert.AreEqual(4, R.Clamp(1, 10)(4));
         }
-
     }
 }

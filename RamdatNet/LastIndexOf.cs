@@ -11,7 +11,7 @@ namespace RamdatNet
         /// <code>
         /// R.LastIndexOf(3)(new int[] { -1, 3, 3, 0, 1, 2, 3, 4 }); //=> 6
         /// R.LastIndexOf(10)(new int[] { 1, 2, 3, 4 }); //=> -1
-        /// </code> 
+        /// </code>
         public static Func<IList<T>, int> LastIndexOf<T>(T t)
         where T : IComparable
             => list =>

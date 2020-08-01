@@ -1,11 +1,10 @@
-using System;
 using RamdatNet.Library;
+using System;
 
 namespace RamdatNet
 {
     public partial class R
     {
-
         /// <summary>
         /// Returns a new function much like the supplied one, except that the first two arguments' order is reversed.
         /// </summary>
@@ -40,7 +39,7 @@ namespace RamdatNet
         /// Returns a new function much like the supplied one, except that the first two arguments' order is reversed.
         /// </summary>
         /// <code>
-        /// 
+        ///
         /// </code>
         public static VariadicFunction Flip(VariadicFunction fn)
         {
@@ -61,11 +60,12 @@ namespace RamdatNet
 
             return NewFunction;
         }
+
         /// <summary>
         /// Returns a new function much like the supplied one, except that the first two arguments' order is reversed.
         /// </summary>
         /// <code>
-        /// 
+        ///
         /// </code>
         public static Func<T2, Func<T1, Z>> Flip<T1, T2, Z>(Func<T1, T2, Z> fn)
             => t2 => t1 => fn(t1, t2);
@@ -150,6 +150,5 @@ namespace RamdatNet
         /// </summary>
         public static Func<T2, Func<T1, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Func<T16, Z>>>>>>>>>>>>>>>> Flip<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Z>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Z> Fn)
             => t2 => t1 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => Fn(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16);
-
     }
 }

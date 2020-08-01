@@ -1,5 +1,5 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RamdatNet.Tests
 {
@@ -14,6 +14,5 @@ namespace RamdatNet.Tests
 
             Assert.AreEqual(expected, result);
         }
-
     }
 }

@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RamdatNet.Tests
@@ -17,6 +16,7 @@ namespace RamdatNet.Tests
 
             CollectionAssert.AreEqual(expected, result.ToArray());
         }
+
         [TestMethod]
         public void DropRepeatsWith_Tests_String()
         {

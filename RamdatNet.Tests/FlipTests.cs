@@ -1,5 +1,5 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RamdatNet.Tests
 {
@@ -21,8 +21,6 @@ namespace RamdatNet.Tests
             var result2 = R.Flip<int, int[]>(mergeArgs)(1, 2, 3, 4);
 
             CollectionAssert.AreEqual(new int[] { 2, 1, 3, 4 }, result2);
-
-
         }
 
         [TestMethod]

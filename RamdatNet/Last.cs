@@ -12,7 +12,7 @@ namespace RamdatNet
         /// <code>
         /// R.Last(new string[] { "fi", "fo", "fum" }); //=> "fum"
         /// R.Last(new int[] { }); //=> ArgumentException
-        /// </code> 
+        /// </code>
         public static T Last<T>(IList<T> list)
         {
             if (list.Count() == 0)
@@ -27,7 +27,7 @@ namespace RamdatNet
         /// <code>
         /// R.last("abc"); //=> "c"
         /// R.last(""); //=> ""
-        /// </code> 
+        /// </code>
         public static string Last(string str)
         {
             if (str.Length == 0)

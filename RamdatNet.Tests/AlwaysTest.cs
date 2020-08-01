@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RamdatNet.Tests
 {
     [TestClass]
     public class AlwaysTest
     {
-        Func<string> str = R.Always("STRING");
-
-        Func<int> number = R.Always(1);
+        private readonly Func<string> str = R.Always("STRING");
+        private readonly Func<int> number = R.Always(1);
 
         [TestMethod]
         public void AlwaysTest_multiple_tests()

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RamdatNet.Tests.TestDoubles;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RamdatNet.Tests
 {

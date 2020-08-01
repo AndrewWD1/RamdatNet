@@ -1,12 +1,12 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RamdatNet.Tests
 {
     [TestClass]
     public class AnyPassTests
     {
-        static Predicate<int> Checker = R.AnyPass(new Predicate<int>[] {
+        private static Predicate<int> Checker = R.AnyPass(new Predicate<int>[] {
             x => x % 2 == 0,
             x => x > 1
         });

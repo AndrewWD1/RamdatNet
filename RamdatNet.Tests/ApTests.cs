@@ -1,6 +1,6 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RamdatNet.Tests
 {
@@ -15,11 +15,9 @@ namespace RamdatNet.Tests
                 new int[] { 1, 2, 3 }
             ); //=> { 2, 4, 6, 4, 5, 6 }
 
-
             CollectionAssert.AreEqual(
                 new int[] { 2, 4, 6, 4, 5, 6 }, result1.ToArray()
             );
-
         }
 
         [TestMethod]

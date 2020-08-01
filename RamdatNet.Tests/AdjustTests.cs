@@ -1,12 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
 namespace RamdatNet.Tests
 {
     [TestClass]
     public class AdjustTests
     {
-
         [TestMethod]
         public void Adjust_Empty_List()
         {

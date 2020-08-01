@@ -6,7 +6,7 @@ namespace RamdatNet
     public partial class R
     {
         /// <summary>
-        /// Returns all but the last element of the given list or string.  
+        /// Returns all but the last element of the given list or string.
         /// </summary>
         /// <code>
         /// R.Init(new int[] { 1, 2, 3 });  //=> { 1, 2 }
@@ -26,7 +26,7 @@ namespace RamdatNet
         }
 
         /// <summary>
-        /// Returns all but the last element of the given list or string.  
+        /// Returns all but the last element of the given list or string.
         /// </summary>
         /// <code>
         /// R.Init('abc');  //=> 'ab'

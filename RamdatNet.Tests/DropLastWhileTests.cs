@@ -1,6 +1,6 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RamdatNet.Tests
 {
@@ -16,15 +16,14 @@ namespace RamdatNet.Tests
 
             CollectionAssert.AreEqual(expected, result.ToArray());
         }
+
         [TestMethod]
         public void DropLastWhileTests_Docs_String()
         {
-
             var result = R.DropLastWhile(x => x != 'd')("Ramda");
             var expected = "Ramd";
 
             Assert.AreEqual(expected, result);
         }
-
     }
 }

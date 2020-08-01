@@ -1,7 +1,4 @@
-using System;
-using RamdatNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace RamdatNet.Tests
 {

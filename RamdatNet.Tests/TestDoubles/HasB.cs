@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RamdatNet.Tests.TestDoubles
+﻿namespace RamdatNet.Tests.TestDoubles
 {
     public class HasB
     {

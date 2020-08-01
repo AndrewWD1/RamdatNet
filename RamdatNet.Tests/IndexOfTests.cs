@@ -14,6 +14,5 @@ namespace RamdatNet.Tests
             Assert.AreEqual(2, t1);
             Assert.AreEqual(-1, t2);
         }
-
     }
 }

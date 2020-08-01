@@ -15,6 +15,7 @@ namespace RamdatNet
 
             return newPairs;
         }
+
         public static Dictionary<object, object> FromPairs(object[][] pairs)
         {
             Dictionary<object, object> newPairs = new Dictionary<object, object>();
@@ -26,6 +27,5 @@ namespace RamdatNet
 
             return newPairs;
         }
-
     }
 }
