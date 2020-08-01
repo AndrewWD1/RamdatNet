@@ -24,7 +24,7 @@ namespace RamdatNet.Tests
             CollectionAssert.AreEqual(
             R.Tail(new int[] { }).ToArray(), new int[] { }
             );
-            Assert.AreEqual(R.Tail("dabc"), "bc");
+            Assert.AreEqual(R.Tail("abc"), "bc");
             Assert.AreEqual(R.Tail("ab"), "b");
             Assert.AreEqual(R.Tail("a"), "");
             Assert.AreEqual(R.Tail(""), "");
