@@ -9,7 +9,7 @@ namespace RamdatNet.Tests
         [TestMethod]
         public void FlipTests_Docs()
         {
-            int[] mergeArgs(params int[] args)
+            static int[] mergeArgs(params int[] args)
             {
                 return args;
             }
