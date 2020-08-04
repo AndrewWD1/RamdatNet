@@ -12,7 +12,13 @@ namespace RamdatNet.Tests
         {
             var result = R.Aperture<int>(2)(new int[] { 1, 2, 3, 4, 5 }).ToList();
 
-            List<List<int>> expected = new List<List<int>> { new List<int> { 1, 2 }, new List<int> { 2, 3 }, new List<int> { 3, 4 }, new List<int> { 4, 5 } };
+            List<List<int>> expected = new List<List<int>>
+            {
+                new List<int> { 1, 2 },
+                new List<int> { 2, 3 },
+                new List<int> { 3, 4 },
+                new List<int> { 4, 5 }
+            };
 
             /**
             *   * Have to use a loop since CollectionAssert.AreEqual only tests equality one-level deep.
@@ -28,7 +34,12 @@ namespace RamdatNet.Tests
         {
             var result = R.Aperture<int>(3)(new int[] { 1, 2, 3, 4, 5 }).ToList();
 
-            List<int[]> expected = new List<int[]> { new int[] { 1, 2, 3 }, new int[] { 2, 3, 4 }, new int[] { 3, 4, 5 } };
+            List<int[]> expected = new List<int[]>
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 2, 3, 4 },
+                new int[] { 3, 4, 5 }
+            };
 
             /**
             *   * Have to use a loop since CollectionAssert.AreEqual only tests equality on-level deep.
